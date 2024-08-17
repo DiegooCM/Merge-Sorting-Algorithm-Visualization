@@ -1,3 +1,4 @@
+from math import ceil
 import pygame
 import numpy as np
 
@@ -10,15 +11,13 @@ running = True
 
 my_array = [4, 9, 2, 3, 8, 1, 11]
 
-my_array = np.random.choice(range(2, 100), size=50, replace=False)
+my_array = np.random.choice(range(2, 100), size=98, replace=False)
 print(my_array)
 
 light_blue = (155, 214, 243)
-margin = 25
 
-
-
-height_corr = screen_length[1] / max(my_array)
+width_bar = screen_length[0] // len(my_array)
+height_corr = screen_length[1] // max(my_array)
 
 
 while running:
@@ -32,20 +31,18 @@ while running:
     screen.fill("black")
 
     for item in range(len(my_array)):
-        left = (screen_length[0] / len(my_array)) * item
+        left = width_bar * item
         top = height_corr * (max(my_array) - my_array[item])
-
-        width = screen_length[0] / len(my_array) - len(my_array) * 0.07
 
         height_r = screen_length[1] - top
         
-        pygame.draw.rect(screen, light_blue, pygame.Rect(left, top, width, height_r))
+        pygame.draw.rect(screen, light_blue, pygame.Rect(left, top, width_bar, height_r))
 
 
 
     # flip() the display to put your work on screen
     pygame.display.flip()
 
-    clock.tick(60)  # limits FPS to 60
+    clock.tick(30)  # limits FPS to 60
 
 pygame.quit()

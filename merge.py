@@ -56,3 +56,4 @@ def animation_arrays(arrs, original_arr):
         original_arr[indices[0]:indices[-1] + 1] = ar
 
         yield original_arr[:]
+        yield indices

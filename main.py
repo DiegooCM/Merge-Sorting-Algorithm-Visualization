@@ -6,9 +6,10 @@ import merge
 import visualize
 
 def main():
+    
     #Array creation and solution
-    size = 90
-    arr = np.random.choice(range(2, 100), size=size, replace=False)
+    size = 160
+    arr = np.random.choice(range(1, 200), size=size, replace=False)
     result, lista_animacion = merge.merge_sort(arr)
     arrays = merge.animation_arrays(lista_animacion[:-1], arr)
 
@@ -22,15 +23,15 @@ def main():
                 running = False 
 
         try:
-            display.draw(next(arrays)) #Draws the array of 'arrays'
+            display.draw(next(arrays), next(arrays)) #Draws the array of 'arrays'
         except StopIteration:
             # When there are no more arrays to display, it displays the sorted array
-            display.draw(result)
+            display.draw(result, None)
             sleep(3) #A bit of delay to see the sorted array
             running = False
 
 
-        sleep(size * 0.001) #A bit of delay for being able to see the animation
+        sleep(size * 0.0003) #A bit of delay for being able to see the animation
 
     pygame.quit()
 

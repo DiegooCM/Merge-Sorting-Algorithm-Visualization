@@ -3,18 +3,19 @@ from math import ceil
 import pygame
 import numpy as np
 
-
-
 screen_length = [1280, 720]
 screen = pygame.display.set_mode(screen_length)
 
 light_blue = (155, 214, 243)
+light_grey = (190, 190, 190)
+
 
 class display():
     def __init__(self):
         pass
 
     def draw(self, arr):
+        '''Draws the array given'''
         screen.fill("black")
 
         width_bar = screen_length[0] // len(arr)
@@ -26,7 +27,7 @@ class display():
 
             height_r = screen_length[1] - top
             
-            pygame.draw.rect(screen, light_blue, pygame.Rect(left, top, width_bar, height_r))
+            pygame.draw.rect(screen, light_grey, pygame.Rect(left, top, width_bar, height_r))
         
         
         pygame.display.flip()

@@ -1,8 +1,9 @@
 import numpy as np
 
-lista_animacion = []
+animation_arrs = []
     
 def merge_arrs(left, right):
+    '''Merge 2 arrays into a sorted one'''
     left_idx, right_idx = 0, 0
 
     final_arr = []
@@ -27,8 +28,10 @@ def merge_arrs(left, right):
 
 @staticmethod
 def merge_sort(arr):
+    '''Divides the array into shorter one to be able to sort them.
+    The "animation_arrs" saves the solutions of merge_arrs'''
     if len(arr) <= 1:
-        return arr, lista_animacion
+        return arr, animation_arrs
 
     middle = len(arr) // 2
     left = arr[:middle]
@@ -39,18 +42,17 @@ def merge_sort(arr):
     
     result = list(merge_arrs(left, right))
 
-    lista_animacion.append(result)
+    animation_arrs.append(result)
     
-    return (result, lista_animacion)
+    return result, animation_arrs
 
 def animation_arrays(arrs, original_arr):
-    results = []
+    '''Get the solutions of the merge_sort and process them to arrays, 
+    for being able to see the animation of the sort algorithm'''
 
     for ar in arrs:
         indices = list(np.isin(original_arr, ar).nonzero()[0])
 
         original_arr[indices[0]:indices[-1] + 1] = ar
 
-        results.append(original_arr[:])
-
-    return results
+        yield original_arr[:]

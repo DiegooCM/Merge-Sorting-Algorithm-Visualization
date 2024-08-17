@@ -2,20 +2,17 @@ import pygame
 import numpy as np
 from time import sleep
 
-import merge as merge
+import merge
 import visualize
-
 
 def main():
     #Array creation and solution
-    array = [10,9,8,7,6,5,4,3,2,1]
-    #array = np.random.choice(range(2, 100), size=50, replace=False)
-    result, lista_animacion = merge.merge_sort(array)
-    arrays = merge.animation_arrays(lista_animacion[:-1], array)
-    arr_idx = 0
+    size = 90
+    arr = np.random.choice(range(2, 100), size=size, replace=False)
+    result, lista_animacion = merge.merge_sort(arr)
+    arrays = merge.animation_arrays(lista_animacion[:-1], arr)
 
     #Animation visualization
-    
     running = True
     display = visualize.display()
 
@@ -24,28 +21,18 @@ def main():
             if event.type == pygame.QUIT:
                 running = False 
 
-        if arr_idx < len(arrays):
-            display.draw(arrays[arr_idx])
-            sleep(0.3)
-            arr_idx += 1
-        else:
+        try:
+            display.draw(next(arrays)) #Draws the array of 'arrays'
+        except StopIteration:
+            # When there are no more arrays to display, it displays the sorted array
             display.draw(result)
-            sleep(3)
+            sleep(3) #A bit of delay to see the sorted array
             running = False
 
+
+        sleep(size * 0.001) #A bit of delay for being able to see the animation
 
     pygame.quit()
 
 if __name__ == '__main__':
     main()
-    
-    
-    
-
-
-'''import time
-time.perf_counter()
-32311.48899951
-
-time.perf_counter()  # A few seconds later
-32315.261320793'''
